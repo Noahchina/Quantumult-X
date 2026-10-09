@@ -1,0 +1,15 @@
+#!name=澶稿厠
+#!desc=2025-09-09 10:10:26
+
+[rewrite_local]
+
+# 1. 拦截并拒绝搜狗联盟原生广告
+^https?:\/\/huichuan\.sm\.cn\/nativead - reject
+
+# 2. 书旗小说广告配置返回空JSON
+^https?:\/\/stars\.shuqireader\.com\/kkios\/render\/load\/resource\/appConfig - reject-dict
+
+# 3. 精简「我的」页面（调用外部JS）
+^https?:\/\/open-cms-api\.(uc|quark)\.cn\/open-cms url script-response-body https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/quark.js
+
+hostname = %APPEND% *.shuqireader.com,huichuan.sm.cn, open-cms-api.uc.cn, open-cms-api.quark.cn

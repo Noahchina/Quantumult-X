@@ -1,0 +1,16 @@
+
+#!name=航旅纵横去广告
+
+# 注意：不要在这里拦截以下域名，否则会导致正常图片/头像/地图空白
+# sensors.umetrip.com.cn
+# im.umetrip.com
+# oss.umetrip.com（整体）
+
+hostname = *.umetrip.com, oss.umetrip.com, bda.umetrip.com
+
+^https?://bda\.umetrip\.com/gateway/api/umetrip/prets/bda/ url reject
+^https?://bda\.umetrip\.com/gateway/api/umetrip/prets/bda/ url reject
+
+^https?://oss\.umetrip\.com/fs/advert/polite/ url reject
+^https://oss\.umetrip\.com/fs/serviceRecommend/ url reject
+^http://oss\.umetrip\.com/fs/equityCenter/ url reject
