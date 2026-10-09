@@ -6,7 +6,7 @@
 # 使用声明：️仅供学习交流, 🈲️商业用途
 # ********************************
 [rewrite_local]
-^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-response-body photomator.js
-^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-request-header photomator.js
+^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-response-body photomator_old.js
+^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-request-header photomator_old.js
 [mitm] 
 hostname = api.revenuecat.com

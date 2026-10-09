@@ -1,33 +1,54 @@
-/*******************************
-脚本功能：Photomator照片编辑-解锁订阅
-脚本作者：afengye
-注意事项：查看频道说明
-频道地址：https://t.me/afengye
-使用声明：️仅供学习交流, 🈲️商业用途
-********************************
-[rewrite_local]
-^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-response-body https://raw.githubusercontent.com/afengye/QX/main/photomator.js
-^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-request-header https://raw.githubusercontent.com/afengye/QX/main/photomator.js
-[mitm] 
-hostname = api.revenuecat.com
-*******************************/
-let obj = {};
+/*************************************
 
-if(typeof $response == "undefined") {
+项目名称：Photomator-照片编辑
+下载地址：https://t.cn/A60W87es  id1444636541
+脚本作者：chxm1023
+
+**************************************
+
+[rewrite_local]
+^https?:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/BOBOLAOSHIV587/Rules/main/JS/Photomator/JS/Photomator.js
+^https?:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/BOBOLAOSHIV587/Rules/main/JS/Photomator/JS/Photomator.js
+
+[mitm]
+hostname = api.revenuecat.com
+
+*************************************/
+
+
+const chxm1023 = {};
+const chxm1024 = JSON.parse(typeof $response != "undefined" && $response.body || null);
+
+const name = "pixelmator_photo_pro_access";
+const chxm = "pixelmator_photo_lifetime_v1_pro_offer";
+
+  
+if (typeof $response == "undefined") {
   delete $request.headers["x-revenuecat-etag"];
   delete $request.headers["X-RevenueCat-ETag"];
-  obj.headers = $request.headers;
-}else {
-  let body = JSON.parse(typeof $response != "undefined" && $response.body || null);
-  if(body && body.subscriber) {
-    const product_id = "pixelmator_photo_lifetime_v1";
-    const entitlement = "pixelmator_photo_pro_access";
-    let data = {"expires_date": "2999-01-01T00:00:00Z","original_purchase_date":"2021-01-01T00:00:00Z","purchase_date": "2021-01-01T00:00:00Z","ownership_type": "PURCHASED","store": "app_store"};
-    let subscriber = body.subscriber;
-    subscriber.entitlements[(entitlement)] = subscriber.subscriptions[(product_id)] = data;        
-    subscriber.entitlements[(entitlement)].product_identifier = product_id;   
-    obj.body = JSON.stringify(body);
-  } 
+  chxm1023.headers = $request.headers;
+} else if (chxm1024 && chxm1024.subscriber) {
+  data = {
+ "Author": "chxm1023",
+ "Telegram" : "https://t.me/chxm1023",
+ "warning": "仅供学习，禁止转载或售卖",
+ //"expires_date": "2099-09-09T09:09:09Z",
+ "purchase_date": "2022-09-09T09:09:09Z"
+ };
+  chxm1024.subscriber.subscriptions[(chxm)] = {
+ "Author": "chxm1023",
+ "Telegram" : "https://t.me/chxm1023",
+ "warning": "仅供学习，禁止转载或售卖",
+ "original_purchase_date": "2022-09-09T09:09:09Z",
+ "period_type" : "1",
+ "purchase_date": "2022-09-09T09:09:09Z",
+ //"expires_date": "2099-09-09T09:09:09Z",
+ "store" : "app_store",
+ "ownership_type": "PURCHASED"
+ };
+  chxm1024.subscriber.entitlements[(name)] = JSON.parse(JSON.stringify(data));
+  chxm1024.subscriber.entitlements[(name)].product_identifier = (chxm);
+  chxm1023.body = JSON.stringify(chxm1024);
 }
 
-$done(obj);
+$done(chxm1023);
